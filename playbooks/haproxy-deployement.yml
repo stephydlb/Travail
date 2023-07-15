@@ -21,8 +21,7 @@
         permanent: true
         state: enabled
         immediate: yes
-        
-    
+
 - name: verifier le deployement du loadbalancer
   hosts: loadbalancer
   become: no
