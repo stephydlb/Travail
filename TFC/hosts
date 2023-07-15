@@ -1,0 +1,8 @@
+[NODES]
+192.168.56.104
+192.168.56.105
+
+[balancer]
+
+[all:vars]
+ansible_ssh_private_key=/home/stephane/.ssh/id_rsa

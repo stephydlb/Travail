@@ -1,0 +1,35 @@
+---
+- name: deployement haproxy
+  hosts: haproxy
+  become: true
+  vars:
+    haproxy_frontend_name: 'hafronted'
+    haproxy_backend_name: 'habackend'
+    haproxy_backend_servers:
+      - name: node1
+        address: 192.168.56.101
+      - name: node2
+        address: 192.168.56.102
+  tasks:
+    - name: installer happroxy
+      include_role:
+        name: geerlingguy.haproxy
+
+    - name: permettre le port 80 in firewall
+      ansible.posix.firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+        immediate: yes
+
+- name: verifier le deployement du loadbalancer
+  hosts: loadbalancer
+  become: no
+  tasks:
+  - name: l'etat du loadbalancer
+    ansible.builtin.uri:
+      url: http://{{ inventory_hostname }}.lab.local
+      status_code: 200
+    delegate_to: localhost
+
+    
