@@ -1,0 +1,6 @@
+---
+- src: geerlingguy.firewall
+- src: geerlingguy.haproxy
+- src: geerlingguy.apache
+
+# executer : ansible-galaxy install -r requirement.yml

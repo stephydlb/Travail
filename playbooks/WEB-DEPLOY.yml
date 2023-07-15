@@ -1,0 +1,70 @@
+---
+- name: deployement de l'applis
+  hosts: nodes
+  become: yes
+  vars:
+    application_repo: 'https://github.com/stephydlb/deploiement1'
+    application_branch: production
+    application_path: /var/www/html
+
+  tasks:
+  
+    - name: suppression fichier 
+      ansible.builtin.file:
+      state: absent
+      path: "{{ application_path }}"
+      
+    - name: create application directory
+      ansible.builtin.file:
+        state: directory
+        path: "{{ directory_path }}"
+        mode: '0755'
+
+    - name: installer httpd firewalld et git
+      ansible.builtin.dnf:
+        name:
+          - httpd >=2.4
+          - firewalld
+          - git
+      state: latest
+
+    - name: activer et demarrer le service firewalld
+      ansible.builtin.service:
+        name: firewalld
+        enabled: true
+        state: started
+
+    - name: permettre http au firewall
+      ansible.posix.firewalld:
+      service: http
+      paermanent: true
+      state: enables
+      immediate: yes
+
+    - name: activer et demarrer le service http
+      ansible.builtin.service:
+        name: httpd
+        enabled: true
+        state: started   
+
+    - name: git checkout le site web
+      ansible.builtin.git:
+        repo: "{{ application_repo }}"
+        dest: "{{ application_path }}"
+        version: " {{ application_branch }}"
+
+    - name: mise a jour du contenu de la page
+      ansible.builtin.lineinfile:
+        path: "{{ application_path}}/index.html" 
+        regexp: 'SERVER_DETAILS'
+        line: "<h3>{Installed using ansible. serving frrom {{ ansible_hostname }}}</h3>"
+
+    - name: verifier le deployement
+      hosts: nodes
+      become: no 
+      tasks:
+        - name: verifier la sante de l'application 
+          ansible.builtin.url:
+            url: http://{{inventory_hostname}}/lab.local
+            status-code: 200
+          delegate_to: localhost

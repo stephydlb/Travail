@@ -1,0 +1,46 @@
+1. curl -LsS -O https://downloads.mariadb.com/MariaDB/mariadb_repo_setup
+2. sudo bash mariadb_repo_setup
+3. sudo dnf -y install MariaDB-server MariaDB-client MariaDB-backup
+4. sudo sytemctl enable --now mariadb
+5. sudo systemctl status mariadb
+6. sudo mariadb-secure-installation
+	socket = n
+7. mysql -u root -p
+8. >GRANT ALL PRIVILEGES on semaphore.* TO 'semaphore'@'localhost' IDENTIFIED BY 'Password123!';
+9.exit
+10. sudo dnf -y install git
+11. sudo dnf -y install wget
+12. wget https://github.com/ansible-semaphore/semaphore/releases/download/v2.8.74/semaphore_2.8.71_linux_amd64.rpm
+13. sudo dnf -y install semaphore_2.8.74_linux_amd64.rpm
+14. sudo useradd -m -d /opt/semaphore semaphore
+15. sudo su - semaphore
+16. semaphore setup
+	default root: semaphore
+	playbook /tmp/semaphore: /opt/semaphore
+17. username: admin
+18. email
+19. name:
+20. password:
+21. exit
+22. sudo vi/etc/systemd/system/semaphore.service
+	' capture d'ecran'
+23. sudo mkdir /etc/semaphore
+24. sudo ln -s /opt/semaphore/config.json /etc/semaphore/config.json
+25. sudo chown -R semaphore:semaphore /etc/semaphore
+26. sudo systemctl daemon-reload
+27. systemctl enable --now semaphore
+28. systemctl status semaphore
+29. sudo ss -tunelp | grep 3000
+
+                   installing nging as reverse proxy
+30. sudo vi /etc/yum.repos.d/nginx.repo
+	[nginx]
+	name=Nginx repo
+	baseurl=https: //nginx.org/packages/rhel/$releasever/$basearch/
+	gpgcheck=0
+	enable=1
+30. dnf -y install ngnix
+32. systemctl enable --now nginx
+33. sudo mkdir /etc/nginx/ssl
+34. cd /etc/nginx/ssl
+
