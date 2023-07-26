@@ -22,14 +22,14 @@
         state: enabled
         immediate: yes
 
-- name: verifier le deployement du loadbalancer
-  hosts: loadbalancer
-  become: no
-  tasks:
-  - name: l'etat du loadbalancer
-    ansible.builtin.uri:
-      url: http://{{ inventory_hostname }}.lab.local
-      status_code: 200
-    delegate_to: localhost
+    - name: verifier le deployement du loadbalancer
+      hosts: loadbalancer
+      become: no
+      tasks:
+      - name: l'etat du loadbalancer
+        ansible.builtin.uri:
+          url: http://{{ inventory_hostname }}.lab.local
+          status_code: 200
+        delegate_to: localhost
 
     

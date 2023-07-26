@@ -1,0 +1,10 @@
+---
+- hosts: nodes
+  become: true
+  tasks:
+  #serial: 25%
+
+    - name: update apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes   
