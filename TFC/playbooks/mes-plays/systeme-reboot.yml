@@ -1,0 +1,14 @@
+---
+
+- name: redemarrage
+  hosts: nodes
+  gather_facts: no
+  become: true
+  serial: 25%
+  tasks:
+    - name: demarrage des taches d'avant reboot
+      debug:
+        msg: backup
+
+    - name: redemarrage serveur 
+      shell: shutdown -r now
