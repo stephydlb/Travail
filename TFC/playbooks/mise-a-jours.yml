@@ -1,6 +1,7 @@
 ---
 - hosts: all
   become: true
+  serial: 25%
   tasks:
     - name: update apt packages
       apt:
