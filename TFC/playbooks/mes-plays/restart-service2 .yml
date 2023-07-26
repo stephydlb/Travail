@@ -1,0 +1,27 @@
+- name: Redémarrer le service Nginx sur les serveurs Ubuntu
+  hosts:
+    - server1
+    - server2
+  become: yes
+
+  tasks:
+    - name: Redémarrer le service Nginx sur le premier serveur
+      service:
+        name: nginx
+        state: restarted
+      async: 1
+      poll: 5
+      when: inventory_hostname == "node1"
+
+    - name: Attendre 10 secondes avant de redémarrer le service Nginx sur le deuxième serveur
+      pause:
+        seconds: 10
+      when: inventory_hostname == "node2"
+
+    - name: Redémarrer le service Nginx sur le deuxième serveur
+      service:
+        name: nginx
+        state: restarted
+      async: 1
+      poll: 5
+      when: inventory_hostname == "node2"
