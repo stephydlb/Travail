@@ -1,7 +1,8 @@
 ---
-- name: redemarrage du service ...
+- name: redemarrage du service nginx
   host: nodes
+  serial: 25%
   
   service:
-  name: ngnix
+  name: nginx
   state: restarted

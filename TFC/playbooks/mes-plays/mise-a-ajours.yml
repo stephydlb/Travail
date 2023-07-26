@@ -1,11 +1,10 @@
 ---
 - hosts: nodes
   become: true
+  serial: 25%
   tasks:
-  serial: 1 # 25%
 
     - name: update apt packages
       apt:
         upgrade: yes
-        update_cache: yes   
-# ansible-playbook mise-a-jours --ask-become-pass
+        update_cache: yes
