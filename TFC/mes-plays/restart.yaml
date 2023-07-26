@@ -1,0 +1,4 @@
+---
+- name: redemarrage server
+  hosts: nodes
+  action: command /sbin/reboot-t now

@@ -1,0 +1,34 @@
+---
+- name: Installation d'Ansible Tower
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Mise à jour des paquets apt
+      apt:
+        update_cache: yes
+
+    - name: Installation des dépendances
+      apt:
+        name: ['software-properties-common', 'apt-transport-https', 'ca-certificates', 'curl']
+
+    - name: Ajout de la clé GPG
+      apt_key:
+        url: https://releases.ansible.com/keys/ansible_release.pub
+        state: present
+
+    - name: Ajout du référentiel Ansible Tower
+      apt_repository:
+        repo: deb http://releases.ansible.com/ansible-tower/deb/{{ ansible_distribution_release }}/{{ ansible_architecture }}/
+        state: present
+
+    - name: Installation d'Ansible Tower
+      apt:
+        name: ansible-tower
+        state: present
+
+    - name: Démarrage du service Ansible Tower
+      systemd:
+        name: awx-cbreceiver
+        state: started
+        enabled: yes

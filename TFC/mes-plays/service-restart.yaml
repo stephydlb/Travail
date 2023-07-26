@@ -1,0 +1,7 @@
+---
+- name: redemarrage du service ...
+  host: nodes
+  
+  service:
+  name: ngnix
+  state: restarted
