@@ -1,5 +1,6 @@
 ---
-- hosts: nodes
+- name: mise a jours
+  hosts: nodes
   become: true
   serial: 25%
   tasks:

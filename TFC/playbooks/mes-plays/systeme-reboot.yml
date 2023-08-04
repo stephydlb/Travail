@@ -1,14 +1,11 @@
 ---
-
-- name: redemarrage
+- name: Linux Reboot Demo
   hosts: nodes
   gather_facts: no
   become: true
   serial: 25%
-  tasks:
-    - name: demarrage des taches d'avant reboot
-      debug:
-        msg: backup
 
-    - name: redemarrage serveur 
-      shell: shutdown -r now
+  tasks:
+    - name: Reboot the machine (Wait for 5 min)
+      reboot:
+        reboot_timeout: 300
