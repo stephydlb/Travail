@@ -1,5 +1,6 @@
 - name: Redémarrer le service Nginx sur les serveurs Ubuntu
   become: true
+  sudo: yes
   hosts:
     - server1
     - server2
