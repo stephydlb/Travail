@@ -1,7 +1,7 @@
 - name: Redémarrer le service Nginx sur les serveurs Ubuntu
   hosts:
-    - server1
-    - server2
+    - node1
+    - node2
   become: yes
 
   tasks:
