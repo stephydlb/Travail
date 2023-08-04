@@ -5,7 +5,7 @@
   become: yes
 
   tasks:
-    - name: Redémarrer le service Nginx sur le premier serveur*
+    - name: Redémarrer le service Nginx sur le premier serveur
       service:
         name: nginx
         state: restarted
