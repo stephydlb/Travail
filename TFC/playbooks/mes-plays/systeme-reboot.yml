@@ -3,7 +3,7 @@
   hosts: nodes
   gather_facts: no
   become: true
-  serial: 25%
+  serial: 50%
 
   tasks:
     - name: Reboot the machine (Wait for 5 min)
