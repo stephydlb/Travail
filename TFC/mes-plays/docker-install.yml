@@ -1,0 +1,29 @@
+---
+- name: Installer Docker sur Ubuntu 22.04
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Installation des dépendances
+      apt:
+        name: ['apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common']
+
+    - name: Ajout de la clé GPG officielle de Docker
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Ajout du repository Docker
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Installation de Docker
+      apt:
+        name: docker-ce
+        state: present
+
+    - name: Démarrage du service Docker
+      service:
+        name: docker
+        state: started

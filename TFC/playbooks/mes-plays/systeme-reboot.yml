@@ -1,0 +1,11 @@
+---
+- name: Linux Reboot Demo
+  hosts: nodes
+  gather_facts: no
+  become: true
+  serial: 25%
+
+  tasks:
+    - name: Reboot the machine (Wait for 5 min)
+      reboot:
+        reboot_timeout: 300

@@ -1,0 +1,11 @@
+- name: Redémarrer le service Nginx
+  hosts: nodes
+  become: yes
+
+  tasks:
+    - name: Redémarrer le service Nginx
+      service:
+        name: nginx
+        state: restarted
+      async: 1
+      poll: 5

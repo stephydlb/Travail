@@ -1,0 +1,55 @@
+forward for
+
+connaitre l'ip du client
+
+
+
+rendre haproxy transparent
+etre  capable de conserver l'ip de bout en bout
+pur les logs
+pour le type de services zones
+
+-----------------------------------------------
+
+apt-get install python-flask
+--------------------------------------------------
+#!/usr/bin/python
+from flask import flask, render_template, request
+app = Flask(__name__)
+
+@app.route('/')
+def bonjour():
+	ip = request.remote_addr
+	origin=request.headers.get('X-Forwarded-For' , request.remote_addr)
+	return orgin + " via "+ ip
+	
+if _name_=='_main_':
+	app.run(host='0.0.0.0' , port=5000)
+
+
+pour lancer : ./app.py
+---------------------------------------------------------------------------
+config
+
+frontend myapp_front
+    bind *:80
+    mode http
+    option forwardfor
+    default_backend load
+    
+backend load
+    server node1 192.168.56.103:80    
+	
+	
+------------------------------------------------------------------------
+
+listen stats
+
+listen stats
+    bind *:9000
+    stats enable
+    stats uri /stats
+    stats refresh 2s
+    stats auth steph:123456mg	
+	
+	

@@ -1,8 +1,10 @@
 ---
-- hosts: all
+- name: mise a jours
+  hosts: nodes
   become: true
   serial: 25%
   tasks:
+
     - name: update apt packages
       apt:
         upgrade: yes

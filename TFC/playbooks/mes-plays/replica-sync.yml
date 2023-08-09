@@ -1,0 +1,60 @@
+---
+- name: Configuration de la réplication et de la synchronisation entre deux serveurs web
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Installation de MySQL
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - mysql-server
+        - mysql-client
+
+    - name: Configuration de MySQL ou PostgreSQL pour la réplication
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - { src: "mysql.cnf", dest: "/etc/mysql/mysql.conf.d/mysqld.cnf" }
+        - { src: "postgresql.conf", dest: "/etc/postgresql/13/main/postgresql.conf" }
+      notify:
+        - restart mysql 
+    - name: Synchronisation des données
+      synchronize:
+        src: "/var/www/html/"
+        dest: "/var/www/html/"
+        mode: push
+      delegate_to: "{{ item }}"
+      with_items:
+        - "{{ groups['web'][0] }}"
+        - "{{ groups['web'][1] }}"
+
+    - name: Démarrage de MySQL
+      service:
+        name: "{{ item }}"
+        state: started
+      with_items:
+        - mysql
+
+  handlers:
+    - name: Redémarrage de MySQL
+      service:
+        name: "{{ item }}"
+        state: restarted
+      with_items:
+        - mysql
+
+#Pour utiliser ce playbook, vous devez créer un fichier inventory avec les adresses IP ou les noms d'hôte des deux serveurs web Ubuntu :
+
+[web]
+server1 ansible_host=192.168.56.101
+server2 ansible_host=192.168.56.102
+
+#Ensuite, vous pouvez exécuter le playbook avec la commande suivante :
+
+#ansible-playbook -i inventory.yml replication.yml
