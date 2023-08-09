@@ -8,8 +8,3 @@
     shell: /var/www/html/dep1.sh
     args:
       chdir: /var/www/html/
-<<<<<<< HEAD
-    register: script_output
-=======
-    register: script_output
->>>>>>> 348d104cd5729b74033443437068e5d31ae61f8d
