@@ -10,7 +10,6 @@
       service:
         name: nginx
         state: restarted
-      #async: 1
       poll: 5
       when: inventory_hostname == "node1"
 
@@ -23,7 +22,6 @@
       service:
         name: nginx
         state: restarted
-      async: 1
       poll: 5
       when: inventory_hostname == "node2"
 
