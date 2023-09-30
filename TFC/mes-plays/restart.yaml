@@ -1,4 +1,15 @@
 ---
-- name: redemarrage server
+- name: redemarrer le premier serveur
   hosts: nodes
-  action: command /sbin/reboot-t now
+  become: true
+  tasks: 
+    - name: redemarrer 1
+      shell: systemctl restart systemd-networkd.service
+      
+    - name: attendre la reconnexion
+      wait_for:
+        host: "{{ groups['nodes'][1] }}"
+        port: 22
+        timeout: 300
+    - name: redemarrage du 2
+      shell: systemctl restart systemd-networkd.service
