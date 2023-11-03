@@ -1,5 +1,6 @@
 ---
-- hosts: test
+- hosts:
+  - test
   become: true
   serial: 50%
   tasks:
