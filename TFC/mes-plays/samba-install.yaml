@@ -1,4 +1,11 @@
 ---
+- hosts:
+  - node1
+  - node2
+  become: true
+  serial: 50%
+  tasks:
+
 - name: Installation de Samba sur un serveur Ubuntu
   hosts: votre_serveur
 
