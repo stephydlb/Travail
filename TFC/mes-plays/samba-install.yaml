@@ -1,13 +1,10 @@
 ---
-- hosts:
-  - test
+- name: installation de samba
+  hosts: 
+  - node1
+  - node2
   become: true
   serial: 50%
-  tasks:
-
-- name: Installation de Samba sur un serveur Ubuntu
-  hosts: votre_serveur
-
   tasks:
     - name: Mise à jour des paquets
       apt:
@@ -25,8 +22,6 @@
         regexp: '^#?\s*security\s*=\s*user'
         line: 'security = user'
         state: present
-      notify:
-        - Redémarrer Samba
 
     - name: Création d'un utilisateur Samba
       user:
