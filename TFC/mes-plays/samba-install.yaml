@@ -1,7 +1,5 @@
 ---
-- hosts:
-  - node1
-  - node2
+- hosts: test
   become: true
   serial: 50%
   tasks:
