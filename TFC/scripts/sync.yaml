@@ -5,6 +5,6 @@
   tasks:
 
   - name: Exécuter le script
-    shell: /home/vagrant/sync.sh
+    shell: /var/www/html/dep1.sh
     args:
-      chdir: /home/vagrant/
+      chdir: /var/www/html/
