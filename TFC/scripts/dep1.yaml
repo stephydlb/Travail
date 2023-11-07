@@ -1,6 +1,6 @@
 ---
 - name: Exécuter un script sur un node
-  hosts: node1
+  hosts: test
   become: true
   tasks:
 
