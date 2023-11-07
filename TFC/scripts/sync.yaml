@@ -1,10 +1,10 @@
 ---
 - name: Exécuter un script sur un node
-  hosts: test
+  hosts: node2
   become: true
   tasks:
 
   - name: Exécuter le script
-    shell: /var/www/html/dep1.sh
+    shell: /home/vagrant/sync.sh
     args:
-      chdir: /var/www/html/
+      chdir: /home/vagrant/
