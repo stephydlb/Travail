@@ -1,5 +1,4 @@
 # This workflow will build a docker container, publish and deploy it to Tencent Kubernetes Engine (TKE) when there is a push to the "main" branch.
-#
 # To configure this workflow:
 #
 # 1. Ensure that your repository contains the necessary configuration for your Tencent Kubernetes Engine cluster,
@@ -10,7 +9,6 @@
 #    - TENCENT_CLOUD_SECRET_KEY with Tencent Cloud secret key
 #    - TENCENT_CLOUD_ACCOUNT_ID with Tencent Cloud account id
 #    - TKE_REGISTRY_PASSWORD with TKE registry password
-#
 # 3. Change the values for the TKE_IMAGE_URL, TKE_REGION, TKE_CLUSTER_ID and DEPLOYMENT_NAME environment variables (below).
 
 name: Tencent Kubernetes Engine
