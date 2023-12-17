@@ -5,7 +5,7 @@ Pour configurer une adresse IP statique sur votre serveur web Ubuntu, vous pouve
    
    ip addr show
    
-   Cela affichera une liste d'interfaces réseau disponibles, telles que "eth0" ou "enp0s3".
+ l Cela affichera une liste d'interfaces réseau disponibles, telles que "eth0" ou "enp0s3".
 3. Éditez le fichier de configuration de l'interface réseau en utilisant l'éditeur de texte de votre choix. Par exemple, pour éditer le fichier "interfaces", utilisez la commande :
    
    sudo nano /etc/network/interfaces
@@ -29,5 +29,6 @@ Pour configurer une adresse IP statique sur votre serveur web Ubuntu, vous pouve
    ip addr show <interface>
    
    Remplacez "<interface>" par le nom de votre interface réseau (par exemple, "eth0"). Vous devriez voir votre nouvelle adresse IP statique dans la sortie.
+
 
 Assurez-vous de sauvegarder une copie du fichier de configuration d'origine avant de le modifier, au cas où vous auriez besoin de revenir en arrière.
