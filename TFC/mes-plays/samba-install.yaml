@@ -16,7 +16,7 @@
         name: samba
         state: present
 
-    - name: Configuration de Samba
+    - name: Configuration du service Samba
       lineinfile:
         path: /etc/samba/smb.conf
         regexp: '^#?\s*security\s*=\s*user'
@@ -30,7 +30,7 @@
         shell: /bin/false
         createhome: no
 
-    - name: Redémarrage de Samba
+    - name: Redémarrage du service Samba
       service:
         name: smbd
         state: restarted
